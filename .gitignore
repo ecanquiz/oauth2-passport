@@ -1,0 +1,56 @@
+# /auth-client/
+# Logs
+/auth-client/logs
+/auth-client/*.log
+/auth-client/npm-debug.log*
+/auth-client/yarn-debug.log*
+/auth-client/yarn-error.log*
+/auth-client/pnpm-debug.log*
+/auth-client/lerna-debug.log*
+
+/auth-client/node_modules
+/auth-client/.DS_Store
+/auth-client/dist
+/auth-client/dist-ssr
+/auth-client/coverage
+/auth-client/*.local
+
+/auth-client/cypress/videos/
+/auth-client/cypress/screenshots/
+
+# Editor directories and files
+/auth-client/.vscode/*
+/auth-client/!.vscode/extensions.json
+/auth-client/.idea
+/auth-client/*.suo
+/auth-client/*.ntvs*
+/auth-client/*.njsproj
+/auth-client/*.sln
+/auth-client/*.sw?
+
+/auth-client/*.tsbuildinfo
+
+
+# /auth-server/
+/auth-server/.phpunit.cache
+/auth-server/node_modules
+/auth-server/public/build
+/auth-server/public/hot
+/auth-server/public/storage
+/auth-server/storage/*.key
+/auth-server/vendor
+/auth-server/.env
+/auth-server/.env.backup
+/auth-server/.env.production
+/auth-server/.phpactor.json
+/auth-server/.phpunit.result.cache
+/auth-server/Homestead.json
+/auth-server/Homestead.yaml
+/auth-server/auth.json
+/auth-server/npm-debug.log
+/auth-server/yarn-error.log
+/auth-server/.fleet
+/auth-server/.idea
+/auth-server/.vscode
+
+
