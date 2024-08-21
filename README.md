@@ -29,5 +29,8 @@ If your application is primarily using Passport to issue personal access tokens,
 ```sh
 php artisan install:api --passport
 php artisan migrate:fresh
+
+# Create a personal access token client
+php artisan passport:client --personal
 ```
 
