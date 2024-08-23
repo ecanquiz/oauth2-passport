@@ -32,5 +32,9 @@ php artisan migrate:fresh
 
 # Create a personal access token client
 php artisan passport:client --personal
+
+# Is necessary rebuild the permission to generate the token with the oauth
+php artisan passport:install
+#After that update your files with the new generated id and key
 ```
 

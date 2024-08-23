@@ -56,8 +56,8 @@ class ApiController extends Controller
                     "status" => true,
                     "message" => "Login successful",
                     "token" => $token,
-                    "data" => []
-                ]);
+                    "data" => []  
+                ], 200);
             }else{
 
                 return response()->json([
