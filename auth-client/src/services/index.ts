@@ -5,20 +5,24 @@ export const login = async <T>(payload: T) => {
   return Http.post("/api/login", payload);
  }
 
+export const getAuthMenu = () => {
+  return Http.get("/api/users/auth-menu");
+}
+
+export const getAuthUser = () => {
+  //return Http.get("/api/users/auth");
+  return Http.get("/api/profile");
+}
+
 export const logout = () => {
 //  return Http.post("/api/logout");
   return Http.get("/api/logout");
 
 }
 
-export const forgotPassword = async <T>(payload: T) => {
+/*export const forgotPassword = async <T>(payload: T) => {
   //await Http.get("/sanctum/csrf-cookie");
   return Http.post("/forgot-password", payload);
-}
-
-export const getAuthUser = () => {
-  //return Http.get("/api/users/auth");
-  return Http.get("/api/profile");
 }
 
 export const resetPassword = async <T>(payload: T) => {
@@ -42,7 +46,4 @@ export const sendVerification = <T>(payload: T) => {
 export const updateUser = <T>(payload: T) => {
   return Http.put("/user/profile-information", payload);
 }
-
-export const getAuthMenu = () => {
-  return Http.get("/api/users/auth-menu");
-}
+*/

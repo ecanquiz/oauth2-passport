@@ -1,46 +1,76 @@
 // @ts-nocheck
+import { ref } from "vue"
 import router from "@/router";
 import Http from "@/utils/Http"; 
 import * as AuthService from "@/services";
 import { getError } from "@/utils/helpers";
 
 export default {
-
-  setLoggedIn(data) {
-    this.token = data.token
-    window.localStorage.setItem("access-token", this.token);    
-    Http.service.defaults.headers.Authorization=`Bearer ${this.token}`
+  async login(payload) {
+    try {
+      this.pending = true;
+      const {data} = await AuthService.login(payload);
+      if (data.status) {
+          this.setLoggedIn(data.accessToken)
+          const authUser = await this.getAuthUser();
+          if (authUser) {
+            await router.push("/dashboard");
+          } else {
+            const err = Error("Unable to fetch user after login, check your API settings.");
+            err.name = "Fetch User";
+            throw err;
+          }
+      }
+    } catch (err) {
+      this.error = getError(err);
+    } finally {
+      this.pending = false;
+    }
   },
   logout() {
     return AuthService.logout()    
       .then(() => {
-        this.user = null;
-        this.setGuest({ value: "isGuest" });
-        
-        this.token = ''
-        window.localStorage.removeItem("access-token");
-        
-        if (router.currentRoute.value.name !== "login")
-          router.push({ path: "/login" });
+        this.setLoggedOut()               
+
       })
       .catch((err) => {                  
         this.error = getError(err);
       });
   },
   async getAuthUser() {
-    this.loading = true;
     try {
-      const response = await AuthService.getAuthUser();        
-      this.user = response.data.data;        
-      this.loading = false;
-      return response.data.data;
+      const response = await AuthService.getAuthUser();      
+      this.user = response.data.data;
+      return this.user;
     } catch (err) {
-      this.loading = false;        
-      this.user = null;        
+      this.setLoggedOut()         
       this.error = getError(err);        
+    } finally {
+      this.pending = false;
     }
+  },
+  setLoggedIn(accessToken: string) {
+    this.accessToken = accessToken
+    this.setAccessToken(this.accessToken);
+    this.setGuest({ value: "isNotGuest" });
+  },
+  setLoggedOut() {
+    this.user = null;
+    this.removeAccessToken();
+    this.setGuest({ value: "isGuest" });
+    if (router.currentRoute.value.name !== "login")
+      router.push({ path: "/login" });
+  },
+  setAccessToken(accessToken: string) {
+    Http.service.defaults.headers.Authorization=`Bearer ${accessToken}`
+    window.localStorage.setItem("access-token", accessToken);    
+  },
+  removeAccessToken() {
+    this.accessToken = ''
+    Http.service.defaults.headers.Authorization=`Bearer`
+    window.localStorage.removeItem("access-token");
   },
   setGuest({ value }: { value: string}) { 
     window.localStorage.setItem("guest", value);
-  }
+  },  
 }

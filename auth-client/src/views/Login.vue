@@ -7,7 +7,7 @@
   import { useAuthStore } from "@/stores"
 
 
-  const { login, sending, error } = useLogin()
+  const { login } = useLogin()
   const store = computed(() => useAuthStore())
 
 </script>
@@ -19,8 +19,8 @@
     <FormLogin
       class="p-5 bg-base-200 border rounded shadow"
       @submit='login($event)'      
-      :sending='sending'
-      :error='error'
+      :pending='store.pending'
+      :error='store.error'
     />
     <p class="mt-2 text-center text-gray-500">
       <AppLink
@@ -38,6 +38,6 @@
         ¿Olvidaste tu contraseña?
       </AppLink>
     </p>
-    {{ store }}
+    
   </div>
 </template>

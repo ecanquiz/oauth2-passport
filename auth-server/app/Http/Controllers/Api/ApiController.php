@@ -35,44 +35,37 @@ class ApiController extends Controller
 
     // POST [ email, password ]
     public function login(Request $request){
-
         $request->validate([
             "email" => "required|email|string",
             "password" => "required"
         ]);
-
-        // User object
         $user = User::where("email", $request->email)->first();
-
         if(!empty($user)){
-
-            // User exists
             if(Hash::check($request->password, $user->password)){
-
-                // Password matched
-                $token = $user->createToken("mytoken")->accessToken;
-
+                $accessToken = $user->createToken("mytoken")->accessToken;
                 return response()->json([
                     "status" => true,
                     "message" => "Login successful",
-                    "token" => $token,
+                    "accessToken" => $accessToken,
                     "data" => []  
                 ], 200);
             }else{
-
                 return response()->json([
                     "status" => false,
                     "message" => "Password didn't match",
-                    "data" => []
-                ]);
+                    "errors" => [
+                       "Password" => ["Password didn't match."]
+                    ]
+                ], 401);
             }
         }else{
-
             return response()->json([
                 "status" => false,
                 "message" => "Invalid Email value",
-                "data" => []
-            ]);
+                "errors" => [
+                    "Email" => ["Invalid Email value."]
+                ]
+            ], 401);
         }
     }
 
