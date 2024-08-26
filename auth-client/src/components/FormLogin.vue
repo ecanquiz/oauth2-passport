@@ -3,7 +3,7 @@
   
   defineProps({
     error: [Object, String],
-    sending: Boolean
+    pending: Boolean
   })  
   const emit = defineEmits(['submit'])  
   const email = ref(null)  
@@ -50,8 +50,8 @@
       </label>
       <AppBtn
         type="submit"
-        :text="sending ? 'Iniciando sesión...' : 'Iniciar sesión'"
-        :isDisabled='sending'
+        :text="pending ? 'Iniciando sesión...' : 'Iniciar sesión'"
+        :isDisabled='pending'
         data-testid="submit-btn"
       />
     </div>

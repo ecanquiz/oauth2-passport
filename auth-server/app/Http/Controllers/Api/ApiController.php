@@ -28,63 +28,56 @@ class ApiController extends Controller
 
         return response()->json([
             "status" => true,
-            "message" => "User registered successfully",
-            "data" => []
-        ]);
+            "message" => "User registered successfully.",
+            //"data" => []
+        ], 201);
     }
 
     // POST [ email, password ]
     public function login(Request $request){
-
         $request->validate([
             "email" => "required|email|string",
             "password" => "required"
         ]);
-
-        // User object
         $user = User::where("email", $request->email)->first();
-
         if(!empty($user)){
-
-            // User exists
             if(Hash::check($request->password, $user->password)){
-
-                // Password matched
-                $token = $user->createToken("mytoken")->accessToken;
-
+                $accessToken = $user->createToken("mytoken")->accessToken;
                 return response()->json([
                     "status" => true,
-                    "message" => "Login successful",
-                    "token" => $token,
-                    "data" => []  
+                    "message" => "Login successful.",
+                    "accessToken" => $accessToken,
+                    //"data" => []  
                 ], 200);
             }else{
-
                 return response()->json([
                     "status" => false,
-                    "message" => "Password didn't match",
-                    "data" => []
-                ]);
+                    "message" => "Password didn't match.",
+                    "errors" => [
+                       "Password" => ["Password didn't match."]
+                    ]
+                ], 401);
             }
         }else{
-
             return response()->json([
                 "status" => false,
-                "message" => "Invalid Email value",
-                "data" => []
-            ]);
+                "message" => "Invalid Email value.",
+                "errors" => [
+                    "Email" => ["Invalid Email value."]
+                ]
+            ], 401);
         }
     }
 
     // GET [Auth: Token]
     public function profile(){
 
-        $userData = auth()->user();
+        $authUser = auth()->user();
 
         return response()->json([
             "status" => true,
             "message" => "Profile information",
-            "data" => $userData,
+            "authUser" => $authUser,
             "id" => auth()->user()->id
         ]);
     }
@@ -98,7 +91,7 @@ class ApiController extends Controller
 
         return response()->json([
             "status" => true,
-            "message" => "User Logged out successfully"
+            "message" => "User Logged out successfully."
         ]);
      }
 }

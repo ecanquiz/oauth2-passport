@@ -5,7 +5,7 @@ import { useAuthStore } from '../stores/'
 
 import auth from "@/middleware/auth"
 import guest from "@/middleware/guest"
-import admin from "@/middleware/admin"
+//import admin from "@/middleware/admin"
 
 import middlewarePipeline from "../router/middlewarePipeline"
 
@@ -13,7 +13,6 @@ import middlewarePipeline from "../router/middlewarePipeline"
 const storeAuth = computed(() => useAuthStore())
 
 const routes: Array<RouteRecordRaw> = [
-
   {
     path: "/dashboard",
     name: "dashboard",
@@ -26,11 +25,12 @@ const routes: Array<RouteRecordRaw> = [
     meta: { middleware: [guest], layout: "empty" },
     component: () => import("@/views/Login.vue").then(m => m.default),
     alias: '/'
+  }, {
+    path: "/register",
+    name: "Register",    
+    meta: { middleware: [guest], layout: "empty" },
+    component: () => import("@/views/Register.vue").then(m => m.default)
   }
-
-
-
-
 ]
 
 const router = createRouter({

@@ -6,11 +6,18 @@ export interface FormLogin {
 }
 
 export interface StandaloneLogin {
-    sending: Ref<UnwrapRef<boolean>>
+    //pending: Ref<UnwrapRef<boolean>>
     login: (form: FormLogin) => Promise<void>
-    error: Ref<UnwrapRef<null>>
+    //error: Ref<UnwrapRef<object|string>>
 }
 
 export interface authUser {
-    token: string
+    accessToken: string
+}
+
+export interface AuthUserRegister{
+    name: string;
+    email: string;
+    password: string;
+    password_confirmation: string;
 }

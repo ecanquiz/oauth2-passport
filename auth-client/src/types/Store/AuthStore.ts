@@ -2,7 +2,7 @@ export interface AuthStore {
     user: {
         isAdmin?: boolean
     }
-    loading: boolean
-    error: string
-    token: string
+    pending: boolean
+    error: object|string
+    accessToken: string
 }
