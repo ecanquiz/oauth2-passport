@@ -14,3 +14,10 @@ export interface StandaloneLogin {
 export interface authUser {
     accessToken: string
 }
+
+export interface AuthUserRegister{
+    name: string;
+    email: string;
+    password: string;
+    password_confirmation: string;
+}

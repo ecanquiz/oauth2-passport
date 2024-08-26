@@ -40,7 +40,7 @@ export default {
   async getAuthUser() {
     try {
       const response = await AuthService.getAuthUser();      
-      this.user = response.data.data;
+      this.user = response.data.authUser;
       return this.user;
     } catch (err) {
       this.setLoggedOut()         

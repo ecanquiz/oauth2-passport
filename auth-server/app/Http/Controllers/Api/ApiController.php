@@ -28,9 +28,9 @@ class ApiController extends Controller
 
         return response()->json([
             "status" => true,
-            "message" => "User registered successfully",
-            "data" => []
-        ]);
+            "message" => "User registered successfully.",
+            //"data" => []
+        ], 201);
     }
 
     // POST [ email, password ]
@@ -45,14 +45,14 @@ class ApiController extends Controller
                 $accessToken = $user->createToken("mytoken")->accessToken;
                 return response()->json([
                     "status" => true,
-                    "message" => "Login successful",
+                    "message" => "Login successful.",
                     "accessToken" => $accessToken,
-                    "data" => []  
+                    //"data" => []  
                 ], 200);
             }else{
                 return response()->json([
                     "status" => false,
-                    "message" => "Password didn't match",
+                    "message" => "Password didn't match.",
                     "errors" => [
                        "Password" => ["Password didn't match."]
                     ]
@@ -61,7 +61,7 @@ class ApiController extends Controller
         }else{
             return response()->json([
                 "status" => false,
-                "message" => "Invalid Email value",
+                "message" => "Invalid Email value.",
                 "errors" => [
                     "Email" => ["Invalid Email value."]
                 ]
@@ -72,12 +72,12 @@ class ApiController extends Controller
     // GET [Auth: Token]
     public function profile(){
 
-        $userData = auth()->user();
+        $authUser = auth()->user();
 
         return response()->json([
             "status" => true,
             "message" => "Profile information",
-            "data" => $userData,
+            "authUser" => $authUser,
             "id" => auth()->user()->id
         ]);
     }
@@ -91,7 +91,7 @@ class ApiController extends Controller
 
         return response()->json([
             "status" => true,
-            "message" => "User Logged out successfully"
+            "message" => "User Logged out successfully."
         ]);
      }
 }

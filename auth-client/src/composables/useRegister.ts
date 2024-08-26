@@ -1,38 +1,29 @@
 import { ref } from "vue"
 import { useRouter } from 'vue-router';
-import * as AuthService from "@/modules/Auth/services";
+import * as AuthService from "@/services";
 import { getError } from "@/utils/helpers.js";
-
-interface UserAuthRegister{
-  name: string;
-  email: string;
-  password: string;
-  passwordConfirm: string;
-}
+import type { AuthUserRegister } from "@/types/Auth"
 
 export function useRegister() {
   const router = useRouter();
-  const error = ref(null)
-  const sending = ref(false)
+  const error = ref('')
+  const pending = ref(false)
   
-  const register = async (form: UserAuthRegister) => {
-    const payload = {
-      name: form.name,
-      email: form.email,
-      password: form.password,
-      password_confirmation: form.passwordConfirm
-    };
-    error.value = null;
-    sending.value = true;  
+  const register = async (payload: AuthUserRegister) => {
+    error.value = '';
+    pending.value = true;  
     AuthService.registerUser(payload)
-      .then(() => router.push("/dashboard"))
+      .then((response) => {
+        alert(response.data.message)
+        router.push("/login")
+      })
       .catch((e) => error.value = getError(e))
-      .finally(() => sending.value = false);
+      .finally(() => pending.value = false);
   }
 
   return {
     register,
-    sending,
+    pending,
     error
   }
 }

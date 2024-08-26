@@ -1,7 +1,6 @@
 import Http from "@/utils/Http";
 
-export const login = async <T>(payload: T) => {
-  //await Http.get("/sanctum/csrf-cookie");
+export const login = async <T>(payload: T) => {  
   return Http.post("/api/login", payload);
  }
 
@@ -20,6 +19,10 @@ export const logout = () => {
 
 }
 
+export const registerUser = async <T>(payload: T) => {  
+  return Http.post("/api/register", payload);
+}
+
 /*export const forgotPassword = async <T>(payload: T) => {
   //await Http.get("/sanctum/csrf-cookie");
   return Http.post("/forgot-password", payload);
@@ -34,10 +37,6 @@ export const updatePassword = <T>(payload: T) => {
   return Http.put("/user/password", payload);
 }
 
-export const registerUser = async <T>(payload: T) => {
-  //await Http.get("/sanctum/csrf-cookie");
-  return Http.post("/register", payload);
-}
 
 export const sendVerification = <T>(payload: T) => {
   return Http.post("/email/verification-notification", payload);

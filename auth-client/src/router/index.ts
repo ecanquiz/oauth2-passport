@@ -25,6 +25,11 @@ const routes: Array<RouteRecordRaw> = [
     meta: { middleware: [guest], layout: "empty" },
     component: () => import("@/views/Login.vue").then(m => m.default),
     alias: '/'
+  }, {
+    path: "/register",
+    name: "Register",    
+    meta: { middleware: [guest], layout: "empty" },
+    component: () => import("@/views/Register.vue").then(m => m.default)
   }
 ]
 
