@@ -2,7 +2,9 @@
 import { ref } from "vue";
 import { useAuthStore } from "@/stores/index"
 import { useSidebar } from "@/composables/useSidebar";
-import RecursiveMenu from "@/layouts/RecursiveMenu/Index.vue";
+//import RecursiveMenu from "@/layouts/RecursiveMenu/Index.vue";
+import Menu from "@/layouts/Menu.vue";
+
 
 const { isOpen, isClose } = useSidebar()
 const store = useAuthStore()
@@ -21,13 +23,15 @@ const store = useAuthStore()
       :class="isOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'"
       class="bg-base-200 fixed z-30 inset-y-0 left-0 transition duration-300 transform overflow-y-auto lg:static lg:inset-0 block lg:hidden"
     >
-      <RecursiveMenu /> 
+      <!--RecursiveMenu /--> 
     </div>
     <div
       :class="!isClose ? 'translate-x-0 ease-out w-full' : '-translate-x-full ease-in w-0'"
       class="bg-base-200 fixed z-30 inset-y-0 left-0 transition duration-300 transform overflow-y-auto lg:static lg:inset-x-0 hidden lg:block"
     >
-      <RecursiveMenu />
+      <!--RecursiveMenu /-->
+      <Menu />
+
     </div>
   </div>
 </template>
