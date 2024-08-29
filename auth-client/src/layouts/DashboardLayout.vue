@@ -1,7 +1,13 @@
 <script setup lang="ts">
+import { computed, onMounted } from "vue";
+import { useAuthStore } from "@/stores"
 import Header from "./Header.vue"
 import Sidebar from "./Sidebar.vue"
 import PageFoot from "./PageFoot.vue"
+
+const store = computed(() => useAuthStore())
+
+onMounted( async ()=> await store.value.getAuthUser() )
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { useAuthStore } from "@/stores"
 import { useSidebar } from "@/composables/useSidebar"
 import Logout from "@/components/Logout.vue"
@@ -11,6 +11,11 @@ import SelectTheme from "./SelectTheme.vue"
 const { isOpen, isClose } = useSidebar()
 const dropdownOpen = ref(false)
 const store = computed(() => useAuthStore())
+
+
+
+
+
 </script>
 
 <template>

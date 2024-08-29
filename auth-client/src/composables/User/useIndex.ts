@@ -30,8 +30,8 @@ export default () => {
     setSort, 
   } = useTableGrid(data, "/users")
 
-  const getUsers = (routeQuery: string) => {  
-    return UserService.getUsers(routeQuery)
+  const getUsers = async (routeQuery: string) => {
+    return await UserService.getUsers(routeQuery)
       .then((response) => {
         errors.value = {}
         data.rows = response.data.rows.data
@@ -69,8 +69,8 @@ export default () => {
     }
   })
 
-  onMounted(() => {
-    getUsers(
+  onMounted(async () => {
+    await getUsers(
       new URLSearchParams(route.query as Params).toString()
     )
   })

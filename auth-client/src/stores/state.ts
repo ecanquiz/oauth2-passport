@@ -4,5 +4,5 @@ export default (): AuthStore => ({
   user: {},
   pending: false,
   error: '',
-  accessToken: ''
+  //accessToken: ''
 });
