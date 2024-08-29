@@ -5,7 +5,7 @@ import { useAuthStore } from '../stores/'
 
 import auth from "@/middleware/auth"
 import guest from "@/middleware/guest"
-//import admin from "@/middleware/admin"
+import admin from "@/middleware/admin"
 
 import middlewarePipeline from "../router/middlewarePipeline"
 
@@ -30,7 +30,46 @@ const routes: Array<RouteRecordRaw> = [
     name: "Register",    
     meta: { middleware: [guest], layout: "empty" },
     component: () => import("@/views/Register.vue").then(m => m.default)
+  }, {
+    path: "/users",
+    name: "users",
+    meta: { middleware: [auth] }, //admin
+    component: () => import("@/views/User/Index.vue").then(m => m.default)
+  }, {
+    path: "/users/create",
+    name: "userCreate",
+    meta: { middleware: [auth] }, // admin
+    component: () => import("@/views/User/CreateOrEdit.vue").then(m => m.default),
+    props: true
+  }, {
+    path: "/users/edit/:id(\\d+)",
+    name: "userEdit",
+    meta: { middleware: [auth] }, // admin
+    component: () => import("@/views/User/CreateOrEdit.vue").then(m => m.default),
+    props: true
   }
+
+
+
+
+
+, {
+  path: "/profile",
+  name: "profile",
+  meta: { middleware: [auth] },
+  component: () => import("@/views/Profile.vue").then(m => m.default),
+}, {
+  path: "/about",
+  name: "About",
+  meta: { middleware: [guest], layout: "empty" },
+  component: () => import("@/components/About.vue").then(m => m.default)
+}, {
+  path: "/:catchAll(.*)",
+  name: "NotFound",
+  meta: { middleware: [guest], layout: "empty" },
+  component: () => import("@/components/NotFound.vue").then(m => m.default),    
+}
+
 ]
 
 const router = createRouter({

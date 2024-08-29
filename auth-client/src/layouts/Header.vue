@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { useAuthStore } from "@/stores"
 import { useSidebar } from "@/composables/useSidebar"
 import Logout from "@/components/Logout.vue"
@@ -11,6 +11,11 @@ import SelectTheme from "./SelectTheme.vue"
 const { isOpen, isClose } = useSidebar()
 const dropdownOpen = ref(false)
 const store = computed(() => useAuthStore())
+
+
+
+
+
 </script>
 
 <template>
@@ -57,7 +62,7 @@ const store = computed(() => useAuthStore())
 
       <div v-if="store.authUser" class="flex items-center space-x-5 ml-3">
         <AppLink to="/dashboard">
-          <HomeIcon class="w-6 h-6" />
+          <!--HomeIcon class="w-6 h-6" /-->
           <!--IconLogo
             class= "flex justify-center pt-4 sm:justify-start sm:pt-0 h-12 w-12 bg-transparent"
             fill="#ffffff"

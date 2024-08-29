@@ -4,5 +4,5 @@ export interface AuthStore {
     }
     pending: boolean
     error: object|string
-    accessToken: string
+    //accessToken: string
 }
