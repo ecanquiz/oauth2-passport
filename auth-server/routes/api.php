@@ -12,7 +12,19 @@ Route::post("login", [ApiController::class, "login"]);
 
 // Protected Routes
 Route::group([ "middleware" => ["auth:api"] ], function(){
-    Route::get("users", [UserController::class, "index"]);
+
+    Route::prefix('users')->group(function () {
+        Route::get("/", [UserController::class, "index"]);
+        Route::post('/', [UserController::class, 'store']);
+        Route::get('/{user}', [UserController::class, 'show']);
+        Route::post('/{user}', [UserController::class, 'update']);
+        Route::delete('/{id}', [UserController::class,'destroy']);
+        //Route::get('/auth', AuthController::class);
+        //Route::get('/auth-menu', AuthMenuController::class);            
+        //
+        //Route::post('/auth/avatar', [AvatarController::class, 'store']);
+    });
+
     Route::get("profile", [ApiController::class, "profile"]);
     Route::get("logout", [ApiController::class, "logout"]);
 });

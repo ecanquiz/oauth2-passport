@@ -43,7 +43,8 @@ class UserController extends Controller
      */ 
     public function store(StoreUserRequest $request): JsonResponse
     {
-        if (Auth::user()->isAdmin()) {
+        //if (Auth::user()->isAdmin()) {
+        if (auth()->user()) {
             return StoreUserService::execute($request);
         }
         return  response()->json(["message" => "Forbidden"], 403);
@@ -57,7 +58,9 @@ class UserController extends Controller
      */
     public function show(User $user): UserResource | JsonResponse
     {
-        if (Auth::user()->isAdmin()) {
+        //if (Auth::user()->isAdmin()) {
+        if (Auth::user()) {
+
           return new UserResource($user);
         }
         return  response()->json(["message" => "Forbidden"], 403);
@@ -72,7 +75,8 @@ class UserController extends Controller
      */     
     public function update(UpdateUserRequest $request, User $user): JsonResponse
     {
-        if (Auth::user()->isAdmin()) {
+        //if (Auth::user()->isAdmin()) {
+        if (Auth::user()) {
             return UpdateUserService::execute($request, $user);
         }
         return  response()->json(["message" => "Forbidden"], 403);
@@ -86,7 +90,8 @@ class UserController extends Controller
      */
     public function destroy(Request $request): JsonResponse
     {      
-        if (Auth::user()->isAdmin()) {
+        //if (Auth::user()->isAdmin()) {
+        if (Auth::user()) {
             User::destroy($request->id);
             return response()->json(204);            
         }

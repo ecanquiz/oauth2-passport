@@ -1,9 +1,9 @@
 import { onMounted, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import useHttp from "@/composables/useHttp";
-import UserService from "@/modules/User/services";
-import type Role from "../types/Role"
-import type User from "../types/User"
+import UserService from "@/services/User";
+import type Role from "@/types/User/Role"
+import type User from "@/types/User/User"
 
 export default (userId?: string) => {
   const router = useRouter();
@@ -40,7 +40,7 @@ export default (userId?: string) => {
         })
     }
     loading.value = true
-    UserService.helperTablesGet()
+    /*UserService.helperTablesGet()
       .then((response) => {
         roles.value = response.data.roles
       })
@@ -49,7 +49,7 @@ export default (userId?: string) => {
       })
       .finally(() => {
         loading.value = false
-      })
+      })*/
   })
 
   const insertUser = async (user: User) => {  
