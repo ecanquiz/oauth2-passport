@@ -8,6 +8,7 @@ export default<Init> {
   //baseURL: import.meta.env.VITE_APP_API_URL, //process.env.VUE_APP_API_URL,  
   baseURL: process.env.VUE_APP_API_URL,
   customHeaders: { 
+    'X-Requested-With': 'XMLHttpRequest',
     'Content-Type': 'application/json', 
     'secret': '', 
     'Authorization': 'Bearer '

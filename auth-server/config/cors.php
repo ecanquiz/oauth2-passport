@@ -18,6 +18,7 @@ return [
     'paths' => [
         //'*',
         'api/*',
+        'oauth/*'
         /*'login',
         'logout',
         'register',

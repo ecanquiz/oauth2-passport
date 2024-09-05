@@ -47,17 +47,16 @@ const routes: Array<RouteRecordRaw> = [
     meta: { middleware: [auth] }, // admin
     component: () => import("@/views/User/CreateOrEdit.vue").then(m => m.default),
     props: true
-  }
-
-
-
-
-
-, {
+  }, {
   path: "/profile",
   name: "profile",
   meta: { middleware: [auth] },
   component: () => import("@/views/Profile.vue").then(m => m.default),
+}, {
+  path: "/clients",
+  name: "clients",
+  meta: { middleware: [auth] }, //admin
+  component: () => import("@/views/Clients/Index.vue").then(m => m.default)
 }, {
   path: "/about",
   name: "About",
